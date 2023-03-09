@@ -1,24 +1,39 @@
 package application;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        File file = new File("/home/leonardords/temp/in.txt");
-        Scanner scanner = null;
+        final String FILE_PATH = "/home/leonardords/temp/in.txt";
+
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
 
         try {
-            scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
+            fileReader = new FileReader(FILE_PATH);
+            bufferedReader = new BufferedReader(fileReader);
+
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
             }
         } catch (IOException exception) {
             System.out.println("Error: " + exception.getMessage());
         } finally {
-            if (scanner != null) {
-                scanner.close();
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
         }
     }
