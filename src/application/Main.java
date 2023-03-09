@@ -1,21 +1,32 @@
 package application;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final String FILE_PATH = "/home/leonardords/temp/out.txt";
-        String[] lines = new String[]{"Leonardo", "Joelma", "Matheus", "Geraldo", "Eduarda", "Juliana", "Thalita"};
+        Scanner scanner = new Scanner(System.in);
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            for (String line : lines) {
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
-        } catch (IOException exception) {
-            System.out.println("Error: " + exception.getMessage());
+        System.out.println("Enter a folder path: ");
+        String filePath = scanner.next();
+
+        File path = new File(filePath);
+
+        File[] folders = path.listFiles(File::isDirectory);
+
+        for (File folder : folders) {
+            System.out.println(folder);
         }
+
+        File[] files = path.listFiles(File::isFile);
+
+        for (File file : files) {
+            System.out.println(file);
+        }
+
+        boolean success = new File(filePath + "/example").mkdir();
+        System.out.println("Directory created sucessfully: " + success);
+
+        scanner.close();
     }
 }
