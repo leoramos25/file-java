@@ -8,13 +8,7 @@ public class Main {
     public static void main(String[] args) {
         final String FILE_PATH = "/home/leonardords/temp/in.txt";
 
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
-
-        try {
-            fileReader = new FileReader(FILE_PATH);
-            bufferedReader = new BufferedReader(fileReader);
-
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line = bufferedReader.readLine();
 
             while (line != null) {
@@ -23,18 +17,6 @@ public class Main {
             }
         } catch (IOException exception) {
             System.out.println("Error: " + exception.getMessage());
-        } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-
-                if (fileReader != null) {
-                    fileReader.close();
-                }
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
         }
     }
 }
