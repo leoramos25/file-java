@@ -1,19 +1,18 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        final String FILE_PATH = "/home/leonardords/temp/in.txt";
+        final String FILE_PATH = "/home/leonardords/temp/out.txt";
+        String[] lines = new String[]{"Leonardo", "Joelma", "Matheus", "Geraldo", "Eduarda", "Juliana", "Thalita"};
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line = bufferedReader.readLine();
-
-            while (line != null) {
-                System.out.println(line);
-                line = bufferedReader.readLine();
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            for (String line : lines) {
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
             }
         } catch (IOException exception) {
             System.out.println("Error: " + exception.getMessage());
