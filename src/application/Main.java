@@ -7,25 +7,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter a folder path: ");
-        String filePath = scanner.next();
+        System.out.println("Enter a fila path: ");
+        String filePath = scanner.nextLine();
 
         File path = new File(filePath);
 
-        File[] folders = path.listFiles(File::isDirectory);
-
-        for (File folder : folders) {
-            System.out.println(folder);
-        }
-
-        File[] files = path.listFiles(File::isFile);
-
-        for (File file : files) {
-            System.out.println(file);
-        }
-
-        boolean success = new File(filePath + "/example").mkdir();
-        System.out.println("Directory created sucessfully: " + success);
+        System.out.println("getName: " + path.getName());
+        System.out.println("getName: " + path.getParent());
+        System.out.println("getName: " + path.getPath());
 
         scanner.close();
     }
